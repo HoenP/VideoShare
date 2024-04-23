@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'videos',
+    'profiles',
     'crispy_forms',
     'crispy_bootstrap5',
     
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'videoShare.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
+                
             ],
         },
     },
@@ -88,15 +89,31 @@ WSGI_APPLICATION = 'videoShare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        'NAME': 'DACS',
+        'HOST': 'LAPTOP-R6TJ5K38\SQLEXPRESS',
+        #'PORT': '1433',  # Cổng mặc định của SQL Server
+        
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',  # Sử dụng xác thực Windows
+        },
     }
 }
 
+
 AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
+    
 ]
 
 # Password validation
@@ -149,5 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND ='django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = 'home'
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'profiles.forms.ProfileForm'
 
 

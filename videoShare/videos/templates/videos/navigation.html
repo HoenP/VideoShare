@@ -1,0 +1,92 @@
+
+
+
+    
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <img src="/media/images/menu.jpg" width="50" class="menu-icon">
+            <a  href="{% url 'home' %}"><img src="/media/images/logo.png" width="50" class="logo"></p></a>
+                       
+        </div>
+        <div class="nav-middle flex-div">
+            <div class="search-box flex-div">
+                <input type="text" placeholder="Search">
+                <img src="/media/images/search.png">
+            </div>
+            
+        </div>
+        <div class="nav-right flex-div">
+            
+            {% if user.is_authenticated %}
+                <a  href="{% url 'create-video' %}"><img src="/media/images/upload.jpg" width="50" ></a>
+            
+                <img src="/media/images/more.jpg" width="50" >
+                <img src="/media/images/notification.jpg" width="50" >
+                <a  href="{% url 'profile' user.profile.pk %}"><img src="{{ user.profile.image.url }}" width="50" class="img1"  ></a>
+            {% else %}
+                <a class="login-icon" href="{% url 'account_login' %}"><img  src="/media/images/login.png"  ></a>
+            {% endif %}
+            
+            {% comment %} <img src="images/jinx.jpg" width="50" class="user-icon" > {% endcomment %}
+        </div>
+    </nav>
+
+    <!-- ---------------sidebar----------------- -->
+    <div class="sidebar">
+        <div class="shortcut-links">
+            <a href="{% url 'home' %}"><img src="/media/images/home.jpg"><p>Home</p></a>
+            <a href=""><img src="/media/images/explore.jpg"><p>Explore</p></a>
+            <a href=""><img src="/media/images/subscription.jpg"><p>Subcription</p></a>
+            <a href=""><img src="/media/images/library.png"><p>Library</p></a>
+            <a href=""><img src="/media/images/history.jpg"><p>History</p></a>
+            <a href=""><img src="/media/images/playlist.png"><p>PLaylist</p></a>
+            <a href=""><img src="/media/images/messages.png"><p>Messages</p></a>
+            <a href=""><img src="/media/images/showmore.webp"><p>Show More</p></a>
+            <hr>
+        </div>
+        <div class="subscribed-list">
+            <h3>SUBSCRIBED</h3>
+            
+        </div>
+
+        <script src="/media/JS/script.js"></script>
+    </div>
+
+
+
+
+
+
+
+
+{% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      </ul>
+      <ul class="navbar-nav m-lg-auto m-md-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'create-video' %}">Upload Video</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_logout' %}">Sign Out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' user.profile.pk %}"><img src="{{ user.profile.image.url }}" width="35" height="35"  alt="Profile"></a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Sign In</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav> {% endcomment %}

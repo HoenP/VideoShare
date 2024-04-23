@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/media/css/style.css">
+  </head>
+<body>
+    {% include 'videos/navigation.html' %}
+    <div class = "container">
+        <a class=signout href="{% url 'account_logout' %} ">Sign Out</a>
+        <div class="row justify-content-center mt-5">
+            <div class="card col-md-6 col-sm-12 col-xs-12 d-flex flex-row align-items-center p-3 shadow">
+                <img class="profile" height="150" width="150" src="{{ profile.image.url }}">
+                
+            </div>
+
+            <div class="card col-md-6 col-sm-12 col-xs-12 p-3 shadow">
+                <h1>{{ profile.user.username }}</h1>
+                <h5>Name: {{ profile.name }}</h5>
+                <h5>Location: {{ profile.location }}</h5>
+            </div>   
+            
+        </div>
+    
+        
+    
+        {% for video in videos %}
+        <div class="vid-list">
+            <a href="{% url 'video-detail' video.pk %}" ><img src="{{ video.thumbnail.url }}" width="256" height="144" class="thumbnail1"></a>
+            <div class="flex-div">
+              <div class="vid-info">
+                <a href="{% url 'video-detail' video.pk %}" ><h5 class="card-title text-center">{{ video.title }}</h5></a>
+                <p >{{ video.uploader }}</p>
+                <p >{{ video.date_post | date:"M d, Y" }}</p>
+              </div>
+            </div>
+          </div> 
+			<a class="video-icons icon-color" href="{% url 'video-update' video.pk %}">Update</a>
+			<a class="video-icons icon-color" href="{% url 'video-delete' video.pk %}">Delete</a>
+        {% endfor %}
+    </div>
+</body>
